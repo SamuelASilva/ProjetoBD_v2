@@ -10,7 +10,9 @@ import model.entity.Produto;
 
 public class App {
 
-	public static String leString(String msg) {
+	private static final Produto Produto = null;
+
+    public static String leString(String msg) {
         String valor = JOptionPane.showInputDialog(null, msg);
         return valor;
     }
@@ -97,23 +99,20 @@ public class App {
      * 
      */
     public static void atualizarproduto() {
-        String attprod = leString("Digite a placa do veículo que deseja atualizar");
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        if (attprod != null){
-            Produto produto = new Produto();
-            String numeroChassi = leString("Digite o número do Chassi");
-            String placa = leString("Digite a placa");
-            String modelo = leString("Digite o modelo");
-            String marca = leString("Digite a marca");
-            String valor = leString("Digite o valor");
-            produtoDAO.atualizar(produto);
-            System.out.println("Dados atualizados.");
-        }else{
-            System.out.println("Id de veículo inexistente");
-        }
+        String placa = leString("Digite a placa");
+        if (placa != null) {
+            String numeroChassi = leString("Digite o novo Chassi");
+            String placa1 = leString("Digite a nova placa");
+            String modelo = leString("Digite o novo modelo");
+            String marca = leString("Digite a nova marca");
+            String valor = leString("Digite o novo valor");
     
-       
-}
+            Produto produto = new Produto(numeroChassi, placa1, modelo, marca, Double.parseDouble(valor));
+    
+            ProdutoDAO pDAO = new ProdutoDAO();
+            System.out.println(pDAO.atualizar(produto));
+        }
+    }
 
     public static void main(String[] args) {
         int op;

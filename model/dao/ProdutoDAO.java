@@ -2,8 +2,6 @@ package model.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
 
 import model.entity.Produto;
 
@@ -84,18 +82,17 @@ public class ProdutoDAO {
     public boolean atualizar(Produto produto) {
         ConectaBD con = new ConectaBD();
         String sql = "UPDATE produto SET numeroChassi = ?, placa = ?, modelo = ?, marca = ?, valor = ? WHERE placa = ? ";
-        try{
+        try {
             PreparedStatement pst = con.getConexao().prepareStatement(sql);
             pst.setString(1, produto.getnumeroChassi());
             pst.setString(2, produto.getplaca());
             pst.setString(3, produto.getmodelo());
             pst.setString(4, produto.getmarca());
             pst.setDouble(5, produto.getvalor());
-            pst.execute();
-            return pst.getUpdateCount() > 0;
-            // int linhas = pst.executeUpdate();
-            // return linhas>0;
-        }catch (Exception e){
+            pst.setString(6, produto.getplaca()); // Definir o valor do parâmetro placa
+            pst.executeUpdate();
+            return true;
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return false;
