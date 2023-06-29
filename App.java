@@ -26,34 +26,12 @@ public class App {
         System.out.println("6- Adicionar Veiculo");
         System.out.println("7- Lista Veículo por ID");
         System.out.println("8- Consulta por placa");
-        System.out.println("9- Consultar todos Veículos");
-        System.out.println("10- Excluir Veiculo por id");
-        System.out.println("11- Atualizar Veículo");
-        System.out.println("12- Sair");
+        System.out.println("9- Excluir Veiculo por id");
+        System.out.println("10- Atualizar Veículo");
+        System.out.println("11- Sair");
         System.out.print("Digite: ");
         return teclado.nextInt();
     }
-
-    public static void metodoconsultarProdutos() {
-        List<Produto> registrosprod = new ProdutoDAO().consultaProdutos();
-        if (!registrosprod.isEmpty()){
-            String saida = "";
-            saida += "id\tnumeroChassi\tplaca\tmodelo\tmarca\tvalor\n";
-            for (int i = 0; i < registrosprod.size(); i++) {
-                Produto p = registrosprod.get(i);
-                saida += p.getId()+"\t";
-                saida = saida + p.getnumeroChassi()+"\t";
-                saida += p.getplaca()+"\t";       
-                saida += p.getmodelo()+"\t";
-                saida += p.getmarca()+"\t";
-                saida += p.getvalor()+"\n";         
-            }
-            JOptionPane.showMessageDialog(null, new JTextArea(saida));
-        }else{
-            System.out.println("Nao tem registros");
-        }
-    }
-
 
     public static void metodoInserirveiculo() {
         String numeroChassi = leString("Digite o Chassi do veículo");
@@ -214,21 +192,18 @@ public class App {
                     }
                     JOptionPane.showMessageDialog(null, new JTextArea(saida));
                     break;
-                case 9:
-                    metodoconsultarProdutos();
-                    break;
-                case 10: 
+                case 9: 
                     excluirproduto();
                     break;
-                case 11:
+                case 10:
                     atualizarproduto();
                     break;
-                case 12:
+                case 11:
                     System.out.println("Saindo");
                     break;
                 default:
                     System.out.println("Opcao invalida");
             }
-        }while(op!=12);
+        }while(op!=11);
     }
 }

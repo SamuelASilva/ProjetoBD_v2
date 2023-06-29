@@ -100,32 +100,4 @@ public class ProdutoDAO {
         }
         return false;
     }
-
-
-    public List<Produto> consultaProdutos(){
-        ConectaBD con = new ConectaBD();
-        String sql = "SELECT * FROM produto";
-        List<Produto> lista = new LinkedList<Produto>();
-        try {
-            PreparedStatement pst = con.getConexao().prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-
-            while (rs.next()){
-                Produto produto = new Produto(); 
-                String numeroChassi = rs.getString("numeroChassi");
-                String placa = rs.getString("placa");
-                String modelo = rs.getString("modelo");
-                String marca = rs.getString("marca");
-                double valor = rs.getDouble("valor");
-                produto.setnumeroChassi(numeroChassi);
-                produto.setplaca(placa);
-                produto.setmodelo(modelo);
-                produto.setmarca(marca);
-                produto.setvalor(valor);
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return lista;
-    }
 }
