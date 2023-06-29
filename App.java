@@ -92,12 +92,17 @@ public class App {
             JOptionPane.showMessageDialog(null,"Registro " + id + " não existe");
         }
     }
-    /**
-     * 
-     */
+    public static boolean metodoConsultaProduto(String placa) {
+        Produto nplaca = new ProdutoDAO().consultaProduto(placa);
+        if(nplaca != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public static void atualizarproduto() {
         String placa = leString("Digite a placa");
-        if (placa != null) {
+        if (metodoConsultaProduto(placa) == false) {
             String numeroChassi = leString("Digite o novo Chassi");
             String placa1 = leString("Digite a nova placa:");
             String modelo = leString("Digite o novo modelo:");

@@ -46,6 +46,9 @@ public class Produto {
     public String getmarca() {
         return marca;
     }
+    public void setmarca(String marca) {
+        this.marca = marca;
+    }
     public void setnome(String marca) {
         this.marca = marca;
     }
@@ -55,6 +58,5 @@ public class Produto {
     public void setvalor(double valor) {
         this.valor = valor;
     }
-    public void setmarca(String marca2) {
-    }
+
 }

@@ -60,7 +60,7 @@ public class ProdutoDAO {
     }
     public Produto consultarplaca(String placa) {
         ConectaBD con = new ConectaBD();
-        String sql = "SELECT * FROM produto WHERE placa = ?";
+        String sql = "SELECT placa FROM produto WHERE placa = ?";
         Produto p =null;
         try {
             PreparedStatement pst = con.getConexao().prepareStatement(sql);
@@ -78,6 +78,25 @@ public class ProdutoDAO {
             System.out.println(e.getMessage());
         }
         return p;
+    }
+    public Produto consultaProduto(String placa) {
+        ConectaBD con = new ConectaBD();
+        String sql = "SELECT placa * FROM produto WHERE placa = ?";
+        Produto p = null;
+        try {
+            PreparedStatement pst = con.getConexao().prepareStatement(sql);
+            pst.setString(1, placa);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                int Id = rs.getInt("Id");
+                p = new Produto();
+                p.setplaca(placa);
+            }
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return p;
+
     }
     public boolean atualizar(Produto produto) {
         ConectaBD con = new ConectaBD();
