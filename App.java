@@ -99,10 +99,10 @@ public class App {
         String placa = leString("Digite a placa");
         if (placa != null) {
             String numeroChassi = leString("Digite o novo Chassi");
-            String placa1 = leString("Digite a nova placa");
-            String modelo = leString("Digite o novo modelo");
-            String marca = leString("Digite a nova marca");
-            String valor = leString("Digite o novo valor");
+            String placa1 = leString("Digite a nova placa:");
+            String modelo = leString("Digite o novo modelo:");
+            String marca = leString("Digite a nova marca:");
+            String valor = leString("Digite o novo valor:");
     
             Produto produto = new Produto(numeroChassi, placa1, modelo, marca, Double.parseDouble(valor));
     
