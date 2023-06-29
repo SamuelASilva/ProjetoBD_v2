@@ -54,7 +54,24 @@ public class App {
         PessoaDAO pessoaDAO = new PessoaDAO();
         pessoaDAO.inserir(pessoa);        
     }
-	
+
+    public static void metodoConsultarTodos() {
+        List<Pessoa> registros = new PessoaDAO().consultarTodos();
+        if (!registros.isEmpty()){
+            String saida = "";
+            saida += "id\tnome\temail\n";
+            for (int i = 0; i < registros.size(); i++) {
+                Pessoa p = registros.get(i);
+                saida += p.getId()+"\t";
+                saida = saida + p.getNome()+"\t";
+                saida += p.getEmail()+"\n";                
+            }
+            JOptionPane.showMessageDialog(null, new JTextArea(saida));
+        }else{
+            System.out.println("Nao tem registros");
+        }
+    }
+    
     public static void metodoExcluir() {
         String tmp = leString("Digite id para excluir");
         int id = Integer.parseInt(tmp); // converte pra int
@@ -93,7 +110,6 @@ public class App {
             System.out.println(pDAO.atualizar(produto));
         }
     }
-
     public static void main(String[] args) {
         int op;
         do{
