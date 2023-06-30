@@ -114,7 +114,7 @@ public class ProdutoDAO {
             pst.executeUpdate();
             return true;
         } catch (SQLException e) {
-            System.out.println("Ocorreu um erro ao atualizar o produto: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
         return false;
     }
