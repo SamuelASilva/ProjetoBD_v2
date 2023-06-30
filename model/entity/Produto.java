@@ -58,5 +58,7 @@ public class Produto {
     public void setvalor(double valor) {
         this.valor = valor;
     }
+    public void setString(String nString) {
+    }
 
 }
