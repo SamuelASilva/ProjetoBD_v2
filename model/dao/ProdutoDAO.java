@@ -3,6 +3,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
 import model.entity.Produto;
 
 
@@ -58,37 +59,38 @@ public class ProdutoDAO {
         }
         return p;
     }
-    public Produto consultarplaca(String placa) {
+     public Produto consultarplaca(String placa1) {
         ConectaBD con = new ConectaBD();
-        String sql = "SELECT placa FROM produto WHERE placa = ?";
+        String sql = "SELECT * FROM produto WHERE placa = ?";
         Produto p =null;
         try {
             PreparedStatement pst = con.getConexao().prepareStatement(sql);
-            pst.setString(1, placa);
+            pst.setString(1, placa1);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 String numeroChassi = rs.getString("numeroChassi");
+                String placa = rs.getString("placa");
                 String modelo = rs.getString("modelo");
                 String marca = rs.getString("marca");
                 Double valor = rs.getDouble("valor");
                 p = new Produto(numeroChassi, placa, modelo, marca, valor);
-                p.setID(rs.getInt("placa"));
+                p.setString(rs.getNString("placa"));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return p;
     }
+
     public Produto consultaProduto(String placa) {
         ConectaBD con = new ConectaBD();
-        String sql = "SELECT placa * FROM produto WHERE placa = ?";
+        String sql = "SELECT  * FROM produto WHERE placa = ?";
         Produto p = null;
         try {
             PreparedStatement pst = con.getConexao().prepareStatement(sql);
             pst.setString(1, placa);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                int Id = rs.getInt("Id");
                 p = new Produto();
                 p.setplaca(placa);
             }
@@ -100,20 +102,22 @@ public class ProdutoDAO {
     }
     public boolean atualizar(Produto produto) {
         ConectaBD con = new ConectaBD();
-        String sql = "UPDATE produto SET numeroChassi = ?, placa = ?, modelo = ?, marca = ?, valor = ? WHERE placa = ? ";
+        String sql = "UPDATE produto SET numeroChassi = ?, placa = ?, modelo = ?, marca = ?, valor = ? WHERE placa = ?";
         try {
             PreparedStatement pst = con.getConexao().prepareStatement(sql);
-            pst.setString(1, produto.getnumeroChassi());
-            pst.setString(2, produto.getplaca());
-            pst.setString(3, produto.getmodelo());
-            pst.setString(4, produto.getmarca());
-            pst.setDouble(5, produto.getvalor());
-            pst.setString(6, produto.getplaca()); // Definir o valor do parâmetro placa
+            pst.setString(1, produto.getnumeroChassi()); 
+            pst.setString(2, produto.getplaca()); 
+            pst.setString(3, produto.getmodelo()); 
+            pst.setString(4, produto.getmarca()); 
+            pst.setDouble(5, produto.getvalor()); 
+            pst.setString(6, produto.getplaca()); 
             pst.executeUpdate();
             return true;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Ocorreu um erro ao atualizar o produto: " + e.getMessage());
         }
         return false;
     }
+
+
 }

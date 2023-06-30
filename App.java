@@ -10,7 +10,6 @@ import model.entity.Produto;
 
 public class App {
 
-	private static final Produto Produto = null;
 
     public static String leString(String msg) {
         String valor = JOptionPane.showInputDialog(null, msg);
@@ -100,12 +99,9 @@ public class App {
             return false;
         }
     }
-    /**
-     * 
-     */
     public static void atualizarproduto() {
         String placa1 = leString("Digite a placa");
-        if (metodoConsultaProduto(placa1) == false) {
+        if (metodoConsultaProduto(placa1) != false) {
             String numeroChassi = leString("Digite o novo Chassi");
             String placa = leString("Digite a placa");
             String modelo = leString("Digite o novo modelo:");
@@ -113,9 +109,10 @@ public class App {
             String valor = leString("Digite o novo valor:");
             Produto produto = new Produto(numeroChassi, placa, modelo, marca, Double.parseDouble(valor));
             ProdutoDAO pDAO = new ProdutoDAO();
-            pDAO.inserirproduto(produto);
+            pDAO.atualizar(produto);
         }
     }
+
     public static void main(String[] args) {
         int op;
         do{
