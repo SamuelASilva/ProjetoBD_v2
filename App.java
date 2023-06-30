@@ -99,20 +99,27 @@ public class App {
             return false;
         }
     }
-    public static void atualizarproduto() {
+    public static void atualizarProduto() {
         String placa1 = leString("Digite a placa");
-        if (metodoConsultaProduto(placa1) != false) {
+    
+        if (metodoConsultaProduto(placa1) == false) {
             String numeroChassi = leString("Digite o novo Chassi");
             String placa = leString("Digite a placa");
             String modelo = leString("Digite o novo modelo:");
             String marca = leString("Digite a nova marca:");
             String valor = leString("Digite o novo valor:");
-            Produto produto = new Produto(numeroChassi, placa, modelo, marca, Double.parseDouble(valor));
+    
             ProdutoDAO pDAO = new ProdutoDAO();
-            pDAO.atualizar(produto);
+            boolean atualizado = pDAO.atualizar(placa1, numeroChassi, placa, modelo, marca,valor);
+    
+            if (atualizado) {
+                System.out.println("Produto atualizado com sucesso!");
+            } else {
+                System.out.println("Falha ao atualizar o produto.");
+            }
         }
     }
-
+    
     public static void main(String[] args) {
         int op;
         do{
@@ -194,7 +201,7 @@ public class App {
                     excluirproduto();
                     break;
                 case 10:
-                    atualizarproduto();
+                    atualizarProduto();
                     break;
                 case 11:
                     System.out.println("Saindo");

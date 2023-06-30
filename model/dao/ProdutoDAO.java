@@ -100,7 +100,7 @@ public class ProdutoDAO {
         return p;
 
     }
-    public boolean atualizar(Produto produto) {
+  /*    public boolean atualizar(Produto produto) {
         ConectaBD con = new ConectaBD();
         String sql = "UPDATE produto SET numeroChassi = ?, placa = ?, modelo = ?, marca = ?, valor = ? WHERE placa = ?";
         try {
@@ -114,10 +114,47 @@ public class ProdutoDAO {
             pst.executeUpdate();
             return true;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println( e.getMessage());
         }
         return false;
     }
+public boolean atualizar(String placa1, String numeroChassi, String placa, String modelo, String marca, double valor) {
+    // Restante do código
+}
 
+*/
+    public boolean atualizar(String placa1, String numeroChassi1,String modelo1, String marca1, String marca2, String valor2) {
+        ConectaBD con = new ConectaBD();
+        Produto p = consultaProduto(placa1);
+        String numeroChassi = p.getnumeroChassi();
+        String placa = p.getplaca();
+        String modelo = p.getmodelo();
+        String marca = p.getmarca();
+        double valor = p.getvalor();
 
+        String nnumeroChassi = numeroChassi;
+        String nplaca = placa;
+        String nmodelo = modelo;
+        String nmarca = marca;
+        Double nvalor = valor;
+
+        String sql = "UPDATE produto SET numeroChassi = ?, placa = ?, modelo = ?, marca = ?, valor = ? WHERE id = ?";
+        try {
+            PreparedStatement pst = con.getConexao().prepareStatement(sql);
+            pst.setString(1, nnumeroChassi); 
+            pst.setString(2, nplaca); 
+            pst.setString(3, nmodelo); 
+            pst.setString(4, nmarca); 
+            pst.setDouble(5, nvalor); 
+            pst.setInt(6, p.getId());
+            pst.executeUpdate();
+
+            if (pst.getUpdateCount() > 0) {
+				return true;
+            }
+        } catch (SQLException e) {
+            System.out.println( e.getMessage());
+        }
+        return false;
+    }
 }
